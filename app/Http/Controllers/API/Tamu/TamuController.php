@@ -42,7 +42,7 @@ class TamuController extends Controller
         $data->alamat_instansi = $request->alamat_instansi;
         $data->no_hp = $request->no_hp;
         $data->keperluan = $request->keperluan;
-        $data->tipe_tamu = $request->tipe_tamu;
+        $data->tipe_tamu = $request->tipe_tamu; // Tamu dinas, tamu yayasan, tamu umum
         $data->save();
 
         return response()->json(['data' => $data], 201);
