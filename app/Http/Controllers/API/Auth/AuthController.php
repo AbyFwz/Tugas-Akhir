@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -44,13 +44,19 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['message' => 'Hi ' . $user->name . ', welcome to home', 'access_token' => $token, 'token_type' => 'Bearer']);
+        $userinfo = array(
+            'email' => $user->email,
+            'nama' => $user->name,
+            'roles' => $user->roles
+        );
+
+        return response()->json(['message' => 'Hi ' . $user->name . ', welcome!', 'user_info' => $userinfo, 'access_token' => $token, 'token_type' => 'Bearer']);
     }
 
     public function logout()
     {
         auth()->user()->tokens()->delete();
 
-        return ['message' => 'You have successfully logged out and the token was successfully deleted!'];
+        return ['message' => 'Berhasil logout!'];
     }
 }
