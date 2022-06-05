@@ -37,7 +37,7 @@ Route::get('/request-read', function () {
             'deskripsi' => 'Ini arsip'
         ]
     ];
-    return response()->json(['message' => 'Request sukses', 'data' => $data]);
+    return response()->json(['message' => 'Request sukses', 'listarsip' => $data]);
 });
 
 Route::post('/request-post', function (Request $request) {
