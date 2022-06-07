@@ -19,7 +19,9 @@ class SuratMasukController extends Controller
     public function index()
     {
         $data = Surat::where('tipe', 'Surat Masuk')->where('tujuan_surat', null)->get();
-        return response()->json(['data' => $data]);
+        $data = json_encode($data);
+
+        return response()->json(['suratMasuk' => $data]);
     }
 
     /**
@@ -30,11 +32,9 @@ class SuratMasukController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), []);
 
-        ]);
-
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
@@ -46,8 +46,9 @@ class SuratMasukController extends Controller
         $data->tipe_surat = 'Surat Masuk';
         $data->file_surat = null;
         $data->save();
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 201);
+        return response()->json(['suratMasuk' => $data], 201);
     }
 
     /**
@@ -59,8 +60,9 @@ class SuratMasukController extends Controller
     public function show($id)
     {
         $data = Surat::findOrFail($id);
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 200);
+        return response()->json(['suratMasuk' => $data], 200);
     }
 
     /**
@@ -72,11 +74,9 @@ class SuratMasukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), []);
 
-        ]);
-
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
@@ -88,8 +88,9 @@ class SuratMasukController extends Controller
         $data->tipe_surat = 'Surat Masuk';
         $data->file_surat = null;
         $data->save();
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 200);
+        return response()->json(['suratMasuk' => $data], 200);
     }
 
     /**

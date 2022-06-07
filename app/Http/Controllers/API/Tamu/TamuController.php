@@ -17,8 +17,9 @@ class TamuController extends Controller
     public function index()
     {
         $data = Tamu::all();
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data]);
+        return response()->json(['tamu' => $data]);
     }
 
     /**
@@ -29,11 +30,9 @@ class TamuController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), []);
 
-        ]);
-
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
@@ -44,8 +43,9 @@ class TamuController extends Controller
         $data->keperluan = $request->keperluan;
         $data->tipe_tamu = $request->tipe_tamu; // Tamu dinas, tamu yayasan, tamu umum
         $data->save();
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 201);
+        return response()->json(['tamu' => $data], 201);
     }
 
     /**
@@ -57,8 +57,9 @@ class TamuController extends Controller
     public function show($id)
     {
         $data = Tamu::findOrFail($id);
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 200);
+        return response()->json(['tamu' => $data], 200);
     }
 
     /**
@@ -70,11 +71,9 @@ class TamuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), []);
 
-        ]);
-
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
@@ -85,8 +84,9 @@ class TamuController extends Controller
         $data->keperluan = $request->keperluan;
         $data->tipe_tamu = $request->tipe_tamu;
         $data->save();
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 200);
+        return response()->json(['tamu' => $data], 200);
     }
 
     /**
@@ -97,6 +97,9 @@ class TamuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Tamu::findOrFail($id);
+        $data->delete();
+
+        return response()->json(['message' => 'Data berhasil dihapus!'], 204);
     }
 }
