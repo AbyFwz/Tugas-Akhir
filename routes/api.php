@@ -52,7 +52,19 @@ Route::post('/request-post', function (Request $request) {
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function () {
-        return auth()->user();
+        // $user = json_encode(auth()->user());
+        $user = [
+            [
+                'nama' => 'Abyan Fawwaz',
+                'email' => 'aby@aby.com'
+            ],
+            [
+                'nama' => 'Erni Srihartini',
+                'email' => 'erni@erni.com'
+            ]
+        ];
+        $user = json_encode($user);
+        return response()->json(['message' => 'Ini Profile', 'user' => $user]);
     });
 
     Route::apiResource('siswa', SiswaController::class,);

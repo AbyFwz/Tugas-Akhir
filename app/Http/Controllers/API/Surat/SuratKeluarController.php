@@ -19,7 +19,9 @@ class SuratKeluarController extends Controller
     public function index()
     {
         $data = Surat::where('tipe', 'Surat Keluar')->where('asal_surat', null)->get();
-        return response()->json(['data' => $data]);
+        $data = json_encode($data);
+
+        return response()->json(['suratKeluar' => $data]);
     }
 
     /**
@@ -46,8 +48,9 @@ class SuratKeluarController extends Controller
         $data->tipe_surat = 'Surat Keluar';
         $data->file_surat = null;
         $data->save();
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 201);
+        return response()->json(['suratKeluar' => $data], 201);
     }
 
     /**
@@ -59,8 +62,9 @@ class SuratKeluarController extends Controller
     public function show($id)
     {
         $data = Surat::findOrFail($id);
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 200);
+        return response()->json(['suratKeluar' => $data], 200);
     }
 
     /**
@@ -88,6 +92,7 @@ class SuratKeluarController extends Controller
         $data->tipe_surat = 'Surat Keluar';
         $data->file_surat = null;
         $data->save();
+        $data = json_encode($data);
 
         return response()->json([], 200);
     }

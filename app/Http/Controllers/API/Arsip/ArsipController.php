@@ -21,11 +21,12 @@ class ArsipController extends Controller
     public function index()
     {
         $data = Arsip::all();
-
-        return response()->json(['data' => $data]);
+        $data = json_encode($data);
+        return response()->json(['arsip' => $data]);
     }
 
     /**
+     *
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -44,8 +45,9 @@ class ArsipController extends Controller
         $data->keterangan = $request->keterangan;
         $data->file_arsip = $request->file_arsip;
         $data->save();
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 200);
+        return response()->json(['arsip' => $data], 200);
     }
 
     /**
@@ -57,11 +59,13 @@ class ArsipController extends Controller
     public function show($id)
     {
         $data = Arsip::findOrFail($id);
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 200);
+        return response()->json(['arsip' => $data], 200);
     }
 
     /**
+     *
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -81,8 +85,9 @@ class ArsipController extends Controller
         $data->keterangan = $request->keterangan;
         $data->file_arsip = $request->file_arsip;
         $data->save();
+        $data = json_encode($data);
 
-        return response()->json(['data' => $data], 200);
+        return response()->json(['arsip' => $data], 200);
     }
 
     /**
@@ -99,3 +104,4 @@ class ArsipController extends Controller
         return response()->json(['message' => 'Data berhasil dihapus'], 204);
     }
 }
+

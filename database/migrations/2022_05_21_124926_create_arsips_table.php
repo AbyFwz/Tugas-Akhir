@@ -16,6 +16,7 @@ class CreateArsipsTable extends Migration
         Schema::create('arsips', function (Blueprint $table) {
             $table->id();
             $table->string('nama_arsip');
+            $table->string('nomor_arsip');
             $table->text('keterangan');
             $table->string('file_arsip')->nullable();
             $table->timestamps();
