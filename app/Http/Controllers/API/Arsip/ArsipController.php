@@ -99,9 +99,8 @@ class ArsipController extends Controller
     public function destroy($id)
     {
         $data = Arsip::findOrFail($id);
-        $data->destroy();
+        $data->delete();
 
-        return response()->json(['message' => 'Data berhasil dihapus'], 204);
+        return response()->json(['message' => 'Data berhasil dihapus', 'arsip' => $id], 204);
     }
 }
-

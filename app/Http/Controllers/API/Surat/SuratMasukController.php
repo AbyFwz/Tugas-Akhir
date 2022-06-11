@@ -18,7 +18,7 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $data = Surat::where('tipe', 'Surat Masuk')->where('tujuan_surat', null)->get();
+        $data = Surat::where('tipe_surat', 'Surat Masuk')->where('tujuan_surat', null)->get();
         $data = json_encode($data);
 
         return response()->json(['suratMasuk' => $data]);
