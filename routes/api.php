@@ -6,6 +6,9 @@ use App\Http\Controllers\API\Siswa\SiswaController;
 use App\Http\Controllers\API\Surat\SuratKeluarController;
 use App\Http\Controllers\API\Surat\SuratMasukController;
 use App\Http\Controllers\API\Tamu\TamuController;
+use App\Http\Controllers\API\Tamu\TamuDinasController;
+use App\Http\Controllers\API\Tamu\TamuUmumController;
+use App\Http\Controllers\API\Tamu\TamuYayasanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -72,6 +75,9 @@ Route::apiResource('arsip', ArsipController::class);
 Route::apiResource('surat-masuk', SuratMasukController::class);
 Route::apiResource('surat-keluar', SuratKeluarController::class);
 Route::apiResource('tamu', TamuController::class);
+Route::apiResource('tamu-dinas', TamuDinasController::class);
+Route::apiResource('tamu-umum', TamuUmumController::class);
+Route::apiResource('tamu-yayasan', TamuYayasanController::class);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // });
