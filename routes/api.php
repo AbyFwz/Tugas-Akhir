@@ -50,28 +50,28 @@ Route::post('/request-post', function (Request $request) {
     return response()->json(['data' => $data]);
 });
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profile', function () {
-        // $user = json_encode(auth()->user());
-        $user = [
-            [
-                'nama' => 'Abyan Fawwaz',
-                'email' => 'aby@aby.com'
-            ],
-            [
-                'nama' => 'Erni Srihartini',
-                'email' => 'erni@erni.com'
-            ]
-        ];
-        $user = json_encode($user);
-        return response()->json(['message' => 'Ini Profile', 'user' => $user]);
-    });
-
-    Route::apiResource('siswa', SiswaController::class,);
-    Route::apiResource('arsip', ArsipController::class);
-    Route::apiResource('surat-masuk', SuratMasukController::class);
-    Route::apiResource('surat-keluar', SuratKeluarController::class);
-    Route::apiResource('tamu', TamuController::class);
-
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::get('/profile', function () {
+    // $user = json_encode(auth()->user());
+    $user = [
+        [
+            'nama' => 'Abyan Fawwaz',
+            'email' => 'aby@aby.com'
+        ],
+        [
+            'nama' => 'Erni Srihartini',
+            'email' => 'erni@erni.com'
+        ]
+    ];
+    $user = json_encode($user);
+    return response()->json(['message' => 'Ini Profile', 'user' => $user]);
 });
+
+Route::apiResource('siswa', SiswaController::class,);
+Route::apiResource('arsip', ArsipController::class);
+Route::apiResource('surat-masuk', SuratMasukController::class);
+Route::apiResource('surat-keluar', SuratKeluarController::class);
+Route::apiResource('tamu', TamuController::class);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// });
