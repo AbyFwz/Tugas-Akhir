@@ -102,7 +102,7 @@ class SuratMasukController extends Controller
     public function destroy($id)
     {
         $data = Surat::findOrFail($id);
-        $data->destroy();
+        $data->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus!'], 204);
     }
