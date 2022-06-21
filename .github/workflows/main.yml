@@ -5,10 +5,6 @@ jobs:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2.4.2
-        with:
-          fetch-depth: 2
       - name: Install dependencies
         uses: php-actions/composer@v6
       - name: 📂 Sync files
@@ -19,3 +15,19 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
+      - name: CD To Project Folder
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: cd public_html/cerman.tahutekno.com/apicerman_abyerni
+          host: ${{ secrets.SSH_HOST }}
+          username: S{{ secrets.SSH_USERNAME }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
+      - name: CD To Project Folder
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: composer install
+          host: ${{ secrets.SSH_HOST }}
+          username: S{{ secrets.SSH_USERNAME }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
