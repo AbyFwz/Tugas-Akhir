@@ -21,7 +21,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: cd public_html/cerman.tahutekno.com/apicerman_abyerni
-          host: ${{ secrets.SSH_HOST }}
+          host: 156.67.212.173
           username: u5863052
           password: ${{ secrets.SSH_PASSWORD }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
@@ -29,7 +29,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: composer install
-          host: ${{ secrets.SSH_HOST }}
+          host: 156.67.212.173
           username: u5863052
           password: ${{ secrets.SSH_PASSWORD }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
