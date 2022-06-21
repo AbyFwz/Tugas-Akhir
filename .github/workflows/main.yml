@@ -22,7 +22,7 @@ jobs:
         with:
           command: cd public_html/cerman.tahutekno.com/apicerman_abyerni
           host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
+          username: u5863052
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
       - name: CD To Project Folder
