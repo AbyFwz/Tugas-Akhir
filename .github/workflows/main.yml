@@ -31,5 +31,5 @@ jobs:
           command: composer install
           host: ${{ secrets.SSH_HOST }}
           username: S{{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
