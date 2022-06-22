@@ -40,14 +40,14 @@ class AuthController extends Controller
             return response()->json(['message' => 'Unauthorized!'], 401);
         }
 
-        $user = User::where('email', $request['email'])->firstOrFail();
+        $user = User::with('role')->where('email', $request['email'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         $userinfo = array(
             'email' => $user->email,
             'nama' => $user->name,
-            'roles' => $user->roles
+            'roles' => $user->role->nama
         );
 
         return response()->json(['message' => 'Hi ' . $user->name . ', welcome!', 'user_info' => $userinfo, 'access_token' => $token, 'token_type' => 'Bearer']);
