@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User\Role;
 use App\Models\User\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -17,11 +18,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::with('role')->get();
-        echo "<pre>"; dd($user); die;
-        // $user = json_encode($user);
+        $data = User::with('role')->get();
+        echo "<pre>"; dd($data); die;
+        // $data = json_encode($data);
 
-        return response()->json(['user' => $user], 200);
+        return response()->json(['user' => $data], 200);
     }
 
     /**
@@ -38,11 +39,14 @@ class UserController extends Controller
             return response()->json($validator->errors());
         }
 
-        $user = new User();
+        $data = new User();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->password = Hash::make($request->password);
+        $data->role_id = $request->role_id;
+        $data->save();
 
-        $user->save();
-
-        return response(['user' => $user], 200);
+        return response()->json(['message' => 'Data berhasil ditambahkan!'], 200);
     }
 
     /**
@@ -53,7 +57,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = User::with('role')->findOrFail($id);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -65,7 +70,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = User::findOrFail($id);
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->password = Hash::make($request->password);
+        $data->role_id = $request->role_id;
+        $data->save();
+
+        return response()->json(['message' => 'Data berhasil diubah!'], 200);
     }
 
     /**
@@ -76,6 +88,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = User::findOrFail($id);
+
+        return response()->json(['message' => 'Data berhasil dihapus!'], 200);
     }
 }
