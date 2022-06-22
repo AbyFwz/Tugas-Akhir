@@ -35,10 +35,12 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
+          dangerous-clean-slate: true
           exclude: |
+            **/vendor/**
+            **/.git*/*
+            **/.git*/**
             .gitignore
             .gitattributes
-            .github/*
-            .git/**
             .env.example
             .env.testing
