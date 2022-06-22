@@ -16,7 +16,7 @@ class TamuDinasController extends Controller
      */
     public function index()
     {
-        $data = Tamu::where('tipe_tamu', 'Tamu Dinas')->get();
+        $data = Tamu::with('user')->where('tipe_tamu', 'Tamu Dinas')->get();
         $data = json_encode($data);
 
         return response()->json(['tamu' => $data]);
@@ -42,10 +42,11 @@ class TamuDinasController extends Controller
         $data->no_hp = $request->no_hp;
         $data->keperluan = $request->keperluan;
         $data->tipe = 'Tamu Dinas'; // Tamu dinas, tamu yayasan, tamu umum
+        $data->user_id = auth()->user()->id;
         $data->save();
         $data = json_encode($data);
 
-        return response()->json(['tamu' => $data], 201);
+        return response()->json(['message' => 'Data berhasil ditambahkan!'], 200);
     }
 
     /**
@@ -56,7 +57,7 @@ class TamuDinasController extends Controller
      */
     public function show($id)
     {
-        $data = Tamu::findOrFail($id);
+        $data = Tamu::with('user')->findOrFail($id);
         $data = json_encode($data);
 
         return response()->json(['tamu' => $data], 200);
@@ -86,7 +87,8 @@ class TamuDinasController extends Controller
         $data->save();
         $data = json_encode($data);
 
-        return response()->json(['tamu' => $data], 200);
+        return response()->json(['message' => 'Data berhasil diubah!'], 200);
+
     }
 
     /**
@@ -100,6 +102,6 @@ class TamuDinasController extends Controller
         $data = Tamu::findOrFail($id);
         $data->delete();
 
-        return response()->json(['message' => 'Data berhasil dihapus!'], 204);
+        return response()->json(['message' => 'Data berhasil dihapus!'], 200);
     }
 }

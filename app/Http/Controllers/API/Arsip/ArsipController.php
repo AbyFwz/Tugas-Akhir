@@ -46,11 +46,11 @@ class ArsipController extends Controller
         $data->nama = $request->nama_arsip;
         $data->keterangan = $request->keterangan;
         $data->file = $request->file_arsip;
-        $data->user_id = $request->user_id;
+        $data->user_id = auth()->user()->id;
         $data->save();
         $data = json_encode($data);
 
-        return response()->json(['arsip' => $data], 200);
+        return response()->json(['message' => 'Data berhasil ditambahkan!'], 200);
     }
 
     /**
@@ -61,7 +61,7 @@ class ArsipController extends Controller
      */
     public function show($id)
     {
-        $data = Arsip::findOrFail($id);
+        $data = Arsip::with('user')->findOrFail($id);
         $data = json_encode($data);
 
         return response()->json(['arsip' => $data], 200);
@@ -84,13 +84,14 @@ class ArsipController extends Controller
         }
 
         $data = Arsip::findOrFail($id);
+        $data->nomor = $request->nomor_arsip;
         $data->nama = $request->nama_arsip;
         $data->keterangan = $request->keterangan;
         $data->file = $request->file_arsip;
         $data->save();
         $data = json_encode($data);
 
-        return response()->json(['arsip' => $data], 200);
+        return response()->json(['message' => 'Data berhasil diubah!'], 200);
     }
 
     /**
@@ -104,6 +105,6 @@ class ArsipController extends Controller
         $data = Arsip::findOrFail($id);
         $data->delete();
 
-        return response()->json(['message' => 'Data berhasil dihapus', 'arsip' => $id], 204);
+        return response()->json(['message' => 'Data berhasil dihapus'], 200);
     }
 }

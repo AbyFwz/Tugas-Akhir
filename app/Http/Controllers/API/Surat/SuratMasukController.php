@@ -18,7 +18,7 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $data = Surat::where('tipe_surat', 'Surat Masuk')->where('tujuan_surat', null)->get();
+        $data = Surat::with('user')->where('tipe_surat', 'Surat Masuk')->where('tujuan_surat', null)->get();
         $data = json_encode($data);
 
         return response()->json(['suratMasuk' => $data]);
@@ -45,10 +45,11 @@ class SuratMasukController extends Controller
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Masuk';
         $data->file = null;
+        $data->user_id = auth()->user()->id;
         $data->save();
         $data = json_encode($data);
 
-        return response()->json(['suratMasuk' => $data], 201);
+        return response()->json(['message' => 'Data berhasil ditambahkan!'], 200);
     }
 
     /**
@@ -59,7 +60,7 @@ class SuratMasukController extends Controller
      */
     public function show($id)
     {
-        $data = Surat::findOrFail($id);
+        $data = Surat::with('user')->findOrFail($id);
         $data = json_encode($data);
 
         return response()->json(['suratMasuk' => $data], 200);
@@ -90,7 +91,7 @@ class SuratMasukController extends Controller
         $data->save();
         $data = json_encode($data);
 
-        return response()->json(['suratMasuk' => $data], 200);
+        return response()->json(['message' => 'Data berhasil diubah!'], 200);
     }
 
     /**
@@ -104,6 +105,6 @@ class SuratMasukController extends Controller
         $data = Surat::findOrFail($id);
         $data->delete();
 
-        return response()->json(['message' => 'Data berhasil dihapus!'], 204);
+        return response()->json(['message' => 'Data berhasil dihapus!'], 200);
     }
 }
