@@ -41,12 +41,12 @@ class SuratKeluarController extends Controller
         }
 
         $data = new Surat;
-        $data->nomor_surat = $request->nomor_surat;
-        $data->tujuan_surat = $request->tujuan_surat;
+        $data->nomor = $request->nomor_surat;
+        $data->tujuan = $request->tujuan_surat;
         $data->uraian = $request->uraian;
         $data->keterangan = $request->keterangan;
-        $data->tipe_surat = 'Surat Keluar';
-        $data->file_surat = null;
+        $data->tipe = 'Surat Keluar';
+        $data->file = null;
         $data->save();
         $data = json_encode($data);
 
@@ -85,12 +85,12 @@ class SuratKeluarController extends Controller
         }
 
         $data = Surat::findOrFail($id);
-        $data->nomor_surat = $request->nomor_surat;
-        $data->tujuan_surat = $request->tujuan_surat;
+        $data->nomor = $request->nomor_surat;
+        $data->tujuan = $request->tujuan_surat;
         $data->uraian = $request->uraian;
         $data->keterangan = $request->keterangan;
-        $data->tipe_surat = 'Surat Keluar';
-        $data->file_surat = null;
+        $data->tipe = 'Surat Keluar';
+        $data->file = null;
         $data->save();
         $data = json_encode($data);
 
