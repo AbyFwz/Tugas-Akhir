@@ -12,19 +12,19 @@ jobs:
       - name: 🔨 Install dependencies
         uses: php-actions/composer@v6
       - name: 🔨 Create .env
-        uses: ozaytsev86/create-env-file@v1
+        uses: SpicyPizza/create-envfile@v1.3
         with:
-          ENV_APP_NAME: CERMAN_API
-          ENV_APP_ENV: production
-          ENV_APP_KEY: null
-          ENV_APP_DEBUG: false
-          ENV_APP_URL: http://cerman.tahutekno.com/
-          ENV_DB_CONNECTION: mysql
-          ENV_DB_HOST: 127.0.0.1
-          ENV_DB_PORT: 3306
-          ENV_DB_DATABASE: ${{ secrets.DB_NAME }}
-          ENV_DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          ENV_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          envkey_APP_NAME: 'CERMAN_API'
+          envkey_APP_ENV: 'production'
+          envkey_APP_KEY: 'null'
+          envkey_APP_DEBUG: 'false'
+          envkey_APP_URL: 'http://cerman.tahutekno.com/'
+          envkey_DB_CONNECTION: 'mysql'
+          envkey_DB_HOST: '127.0.0.1'
+          envkey_DB_PORT: '3306'
+          envkey_DB_DATABASE: ${{ secrets.DB_NAME }}
+          envkey_DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          envkey_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       - name: 🔨 Generate .env key
         run: php artisan key:generate
       - name: 📂 Sync files
