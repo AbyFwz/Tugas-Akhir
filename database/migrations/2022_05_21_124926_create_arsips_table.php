@@ -15,10 +15,15 @@ class CreateArsipsTable extends Migration
     {
         Schema::create('arsips', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_arsip');
-            $table->string('nomor_arsip');
+            $table->string('nama');
+            $table->string('nomor');
             $table->text('keterangan');
-            $table->string('file_arsip')->nullable();
+            $table->string('file')->nullable();
+            $table->foreignId('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->restrictOnDelete();
             $table->timestamps();
         });
     }
