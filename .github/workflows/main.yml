@@ -44,3 +44,4 @@ jobs:
             .gitattributes
             .env.example
             .env.testing
+            DOCKER_ENV
