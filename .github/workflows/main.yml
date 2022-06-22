@@ -36,7 +36,7 @@ jobs:
           protocol: ftps
           port: 21
           exclude: |
-            **/.git*
-            **/.git*/**
+            .git*
+            .git*/**
             .env.example
             .env.testing
