@@ -17,7 +17,7 @@ jobs:
           envkey_APP_NAME: 'CERMAN_API'
           envkey_APP_ENV: 'production'
           envkey_APP_KEY: 'null'
-          envkey_APP_DEBUG: 'false'
+          envkey_APP_DEBUG: false
           envkey_APP_URL: 'http://cerman.tahutekno.com/'
           envkey_DB_CONNECTION: 'mysql'
           envkey_DB_HOST: '127.0.0.1'
@@ -25,6 +25,7 @@ jobs:
           envkey_DB_DATABASE: ${{ secrets.DB_NAME }}
           envkey_DB_USERNAME: ${{ secrets.DB_USERNAME }}
           envkey_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          directory: ./home/runner/work/Tugas-Akhir/Tugas-Akhir/
       - name: 🔨 Generate .env key
         run: php artisan key:generate
       - name: 📂 Sync files
