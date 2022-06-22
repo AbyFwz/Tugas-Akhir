@@ -56,6 +56,8 @@ jobs:
           ENV_DB_DATABASE: ${{ secrets.DB_NAME }}
           ENV_DB_USERNAME: ${{ secrets.DB_USERNAME }}
           ENV_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          ENV_SESSION_DOMAIN: ${{ secrets.HOST }}
+          ENV_SANCTUM_STATEFUL_DOMAINS: ${{ secrets.HOST }}
       - name: 🔨 Generate .env key
         run: php artisan key:generate
       - name: 📂 Sync files
