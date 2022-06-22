@@ -21,7 +21,7 @@ class ArsipController extends Controller
     public function index()
     {
         $data = Arsip::with('user')->get();
-        dd($data); die;
+        // dd($data); die;
         $data = json_encode($data);
         return response()->json(['arsip' => $data]);
     }
