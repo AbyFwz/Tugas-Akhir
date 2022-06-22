@@ -15,11 +15,16 @@ class CreateTamusTable extends Migration
     {
         Schema::create('tamus', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_instansi');
-            $table->string('alamat_instansi');
+            $table->string('nama');
+            $table->string('alamat');
             $table->string('no_hp');
             $table->string('keperluan');
-            $table->string('tipe_tamu');
+            $table->string('tipe');
+            $table->foreignId('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->restrictOnDelete();
             $table->timestamps();
         });
     }

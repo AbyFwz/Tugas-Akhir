@@ -37,11 +37,11 @@ class TamuUmumController extends Controller
         }
 
         $data = new Tamu;
-        $data->nama_instansi = $request->nama_instansi;
-        $data->alamat_instansi = $request->alamat_instansi;
+        $data->nama = $request->nama_instansi;
+        $data->alamat = $request->alamat_instansi;
         $data->no_hp = $request->no_hp;
         $data->keperluan = $request->keperluan;
-        $data->tipe_tamu = 'Tamu Umum'; // Tamu dinas, tamu yayasan, tamu umum
+        $data->tipe = 'Tamu Umum'; // Tamu dinas, tamu yayasan, tamu umum
         $data->save();
         $data = json_encode($data);
 
@@ -78,11 +78,11 @@ class TamuUmumController extends Controller
         }
 
         $data = Tamu::findOrFail($id);
-        $data->nama_instansi = $request->nama_instansi;
-        $data->alamat_instansi = $request->alamat_instansi;
+        $data->nama = $request->nama_instansi;
+        $data->alamat = $request->alamat_instansi;
         $data->no_hp = $request->no_hp;
         $data->keperluan = $request->keperluan;
-        $data->tipe_tamu = 'Tamu Umum';
+        $data->tipe = 'Tamu Umum';
         $data->save();
         $data = json_encode($data);
 
