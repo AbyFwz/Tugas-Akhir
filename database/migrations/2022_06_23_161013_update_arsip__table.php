@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateUserTable extends Migration
+class UpdateArsipTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class UpdateUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreign('role_id')
+        Schema::table('arsips', function (Blueprint $table) {
+            $table->foreign('kategori_id')
                 ->references('id')
-                ->on('roles')
+                ->on('kategoris')
                 ->restrictOnDelete()
                 ->restrictOnUpdate();
         });

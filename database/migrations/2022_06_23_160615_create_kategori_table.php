@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArsipsTable extends Migration
+class CreateKategoriTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreateArsipsTable extends Migration
      */
     public function up()
     {
-        Schema::create('arsips', function (Blueprint $table) {
+        Schema::create('kategori', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('nomor');
-            $table->text('keterangan');
-            $table->string('file')->nullable();
-            $table->foreignId('user_id');
+            $table->string('keterangan');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->restrictOnDelete();
-            $table->foreignId('kategori_id');
             $table->timestamps();
         });
     }
@@ -36,6 +32,6 @@ class CreateArsipsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arsips');
+        Schema::dropIfExists('kategori');
     }
 }
