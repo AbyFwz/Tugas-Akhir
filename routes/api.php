@@ -9,6 +9,7 @@ use App\Http\Controllers\API\Tamu\TamuController;
 use App\Http\Controllers\API\Tamu\TamuDinasController;
 use App\Http\Controllers\API\Tamu\TamuUmumController;
 use App\Http\Controllers\API\Tamu\TamuYayasanController;
+use App\Http\Controllers\API\User\RoleController;
 use App\Http\Controllers\API\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -79,6 +80,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('tamu-umum', TamuUmumController::class);
     Route::apiResource('tamu-yayasan', TamuYayasanController::class);
     Route::apiResource('user', UserController::class);
+    Route::apiResource('role', RoleController::class);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
