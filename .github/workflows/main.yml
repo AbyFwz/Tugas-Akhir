@@ -24,6 +24,8 @@ jobs:
         run: |
           mkdir -p database
           touch database/database.sqlite
+      - name: Migrate Databse
+        run: php artisan migrate:fresh --seed
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
           DB_CONNECTION: sqlite
@@ -48,7 +50,7 @@ jobs:
           ENV_APP_NAME: CERMAN_API
           ENV_APP_ENV: production
           ENV_APP_KEY: ''
-          ENV_APP_DEBUG: false
+          ENV_APP_DEBUG: true
           ENV_APP_URL: http://cerman.tahutekno.com/
           ENV_DB_CONNECTION: mysql
           ENV_DB_HOST: 127.0.0.1
