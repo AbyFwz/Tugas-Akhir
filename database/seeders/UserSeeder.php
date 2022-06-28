@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'name' => 'Abyan Fawwaz',
             'email' => 'aby@admin.com',
             'password' => Hash::make('12345678'),
-            'role_id' => 1
+            'role_id' => Role::get()->first()->id
         ]);
     }
 }
