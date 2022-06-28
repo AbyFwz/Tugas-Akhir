@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $data = User::with('role')->get();
-        echo "<pre>"; dd($data); die;
+        // echo "<pre>"; dd($data); die;
         // $data = json_encode($data);
 
         return response()->json(['user' => $data], 200);
@@ -33,14 +33,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), []);
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role_id' => 'required'
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
+        $role = Role::findOrFail($request->role_id);
+
         $data = new User();
-        $data->name = $request->name;
+        $data->name = $request->nama;
         $data->email = $request->email;
         $data->password = Hash::make($request->password);
         $data->role_id = $request->role_id;
@@ -70,7 +77,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = User::findOrFail($id);
+        $data = User::with('role')->findOrFail($id);
         $data->name = $request->name;
         $data->email = $request->email;
         $data->password = Hash::make($request->password);
