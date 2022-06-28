@@ -16,7 +16,7 @@ class UpdateArsipTable extends Migration
         Schema::table('arsips', function (Blueprint $table) {
             $table->foreign('kategori_id')
                 ->references('id')
-                ->on('kategoris')
+                ->on('kategori')
                 ->restrictOnDelete()
                 ->restrictOnUpdate();
         });
