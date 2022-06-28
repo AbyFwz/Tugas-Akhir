@@ -77,6 +77,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $role = Role::findOrFail($request->role_id);
+
         $data = User::with('role')->findOrFail($id);
         $data->name = $request->name;
         $data->email = $request->email;
@@ -96,6 +109,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $data = User::findOrFail($id);
+        $date->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus!'], 200);
     }
