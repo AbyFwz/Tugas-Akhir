@@ -16,7 +16,7 @@ class TamuYayasanController extends Controller
      */
     public function index()
     {
-        $data = Tamu::with('user')->where('tipe_tamu', 'Tamu Yayasan')->get();
+        $data = Tamu::with('user')->where('tipe', 'Tamu Yayasan')->get();
         $data = json_encode($data);
 
         return response()->json(['tamu' => $data]);

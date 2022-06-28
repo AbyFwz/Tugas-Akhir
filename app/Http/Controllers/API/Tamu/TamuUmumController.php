@@ -16,7 +16,7 @@ class TamuUmumController extends Controller
      */
     public function index()
     {
-        $data = Tamu::with('user')->where('tipe_tamu', 'Tamu Umum')->get();
+        $data = Tamu::with('user')->where('tipe', 'Tamu Umum')->get();
         $data = json_encode($data);
 
         return response()->json(['tamu' => $data]);
