@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API\Arsip;
 
 use App\Http\Controllers\Controller;
 use App\Models\Arsip\Arsip;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ArsipController extends Controller
@@ -41,12 +43,24 @@ class ArsipController extends Controller
             return response()->json($validator->errors());
         }
 
+        if ($request->hasFile('file_arsip')) {
+            echo "File ada"; die;
+            $file = $request->file('file_arsip');
+            $nama_file = $request->tipe_arsip . "_" . Carbon::now() . "_" . $file->getClientOriginalExtension();
+            $destination = Storage::put("/arsip/" . $request->tipe_arsip . "/");
+            $file->move($destination);
+        } else {
+            echo "file tidak ada"; die;
+            $nama_file = '';
+        }
+
         $data = new Arsip;
         $data->nomor = $request->nomor_arsip;
         $data->nama = $request->nama_arsip;
         $data->keterangan = $request->keterangan;
-        $data->file = $request->file_arsip;
+        $data->file = $nama_file;
         $data->user_id = auth()->user()->id;
+        $data->kategori_id = $request->tipe_arsip;
         $data->save();
         $data = json_encode($data);
 
