@@ -37,8 +37,8 @@ class TamuYayasanController extends Controller
         }
 
         $data = new Tamu;
-        $data->namad = $request->nama_instansi;
-        $data->alamatd = $request->alamat_instansi;
+        $data->nama = $request->nama_instansi;
+        $data->alamat = $request->alamat_instansi;
         $data->no_hp = $request->no_hp;
         $data->keperluan = $request->keperluan;
         $data->tipe = 'Tamu Yayasan'; // Tamu dinas, tamu yayasan, tamu umum
@@ -79,8 +79,8 @@ class TamuYayasanController extends Controller
         }
 
         $data = Tamu::findOrFail($id);
-        $data->namad = $request->nama_instansi;
-        $data->alamatd = $request->alamat_instansi;
+        $data->nama = $request->nama_instansi;
+        $data->alamat = $request->alamat_instansi;
         $data->no_hp = $request->no_hp;
         $data->keperluan = $request->keperluan;
         $data->tipe = 'Tamu Yayasan';
