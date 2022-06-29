@@ -66,7 +66,7 @@ class UserController extends Controller
     {
         $data = User::with('role')->findOrFail($id);
         $data = json_encode($data);
-        return response()->json(['data' => $data]);
+        return response()->json(['user' => $data]);
     }
 
     /**
