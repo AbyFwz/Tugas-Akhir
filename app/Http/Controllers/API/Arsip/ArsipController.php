@@ -44,13 +44,13 @@ class ArsipController extends Controller
         }
 
         if ($request->hasFile('file_arsip')) {
-            echo "File ada"; die;
+            // echo "File ada"; die;
             $file = $request->file('file_arsip');
             $nama_file = $request->tipe_arsip . "_" . Carbon::now() . "_" . $file->getClientOriginalExtension();
             $destination = Storage::put("/arsip/" . $request->tipe_arsip . "/");
             $file->move($destination);
         } else {
-            echo "file tidak ada"; die;
+            // echo "file tidak ada"; die;
             $nama_file = '';
         }
 
