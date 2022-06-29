@@ -60,7 +60,7 @@ class ArsipController extends Controller
         $data->keterangan = $request->keterangan;
         $data->file = $nama_file;
         $data->user_id = auth()->user()->id;
-        $data->kategori_id = $request->tipe_arsip;
+        $data->kategori_id = $request->kategori;
         $data->save();
         $data = json_encode($data);
 
@@ -75,7 +75,7 @@ class ArsipController extends Controller
      */
     public function show($id)
     {
-        $data = Arsip::with('user')->findOrFail($id);
+        $data = Arsip::with('user')->with('kategori')->findOrFail($id);
         $data = json_encode($data);
 
         return response()->json(['arsip' => $data], 200);
@@ -102,6 +102,7 @@ class ArsipController extends Controller
         $data->nama = $request->nama_arsip;
         $data->keterangan = $request->keterangan;
         $data->file = $request->file_arsip;
+        $data->kategori_id = $request->kategori;
         $data->save();
         $data = json_encode($data);
 
