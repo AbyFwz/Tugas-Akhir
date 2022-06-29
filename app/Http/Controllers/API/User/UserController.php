@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $data = User::with('role')->get();
         // echo "<pre>"; dd($data); die;
-        // $data = json_encode($data);
+        $data = json_encode($data);
 
         return response()->json(['user' => $data], 200);
     }
@@ -65,6 +65,7 @@ class UserController extends Controller
     public function show($id)
     {
         $data = User::with('role')->findOrFail($id);
+        $data = json_encode($data);
         return response()->json(['data' => $data]);
     }
 

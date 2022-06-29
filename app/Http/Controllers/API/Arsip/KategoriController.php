@@ -17,7 +17,7 @@ class KategoriController extends Controller
     public function index()
     {
         $data = Kategori::all();
-
+        $data = json_encode($data);
         return response()->json(['kategori' => $data]);
     }
 
@@ -52,7 +52,7 @@ class KategoriController extends Controller
     public function show($id)
     {
         $data = Kategori::findOrFail($id);
-
+        $data = json_encode($data);
         return response()->json(['kategori' => $data]);
     }
 
