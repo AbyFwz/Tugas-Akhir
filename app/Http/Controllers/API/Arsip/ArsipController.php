@@ -46,7 +46,7 @@ class ArsipController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 400);
         }
 
         if ($request->hasFile('file_arsip')) {
@@ -106,7 +106,7 @@ class ArsipController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 400);
         }
 
         $data = Arsip::findOrFail($id);
