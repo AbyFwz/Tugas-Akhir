@@ -20,4 +20,9 @@ class Arsip extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function kategori(): BelongsTo
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 }
