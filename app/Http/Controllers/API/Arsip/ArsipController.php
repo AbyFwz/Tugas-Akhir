@@ -37,7 +37,13 @@ class ArsipController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), []);
+        $validator = Validator::make($request->all(), [
+            'nomor' => 'required',
+            'nama' => 'required',
+            'keterangan' => 'required',
+            'kategori' => 'required',
+            'file_arsip' => 'required'
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
@@ -91,7 +97,13 @@ class ArsipController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), []);
+        $validator = Validator::make($request->all(), [
+            'nomor' => 'required',
+            'nama' => 'required',
+            'keterangan' => 'required',
+            'kategori' => 'required',
+            'file_arsip' => 'required'
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
