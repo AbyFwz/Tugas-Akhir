@@ -38,6 +38,7 @@ class KategoriController extends Controller
         $data = new Kategori();
         $data->nama = $request->nama_kategori;
         $data->keterangan = $request->keterangan;
+        $data->user_id = auth()->user()->id;
         $data->save();
 
         return response()->json(['message' => 'Data berhasil ditambahkan!']);
