@@ -37,20 +37,20 @@ class UserController extends Controller
             'nama' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'role_id' => 'required'
+            'role' => 'required'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
-        $role = Role::findOrFail($request->role_id);
+        $role = Role::findOrFail($request->role);
 
         $data = new User();
         $data->name = $request->nama;
         $data->email = $request->email;
         $data->password = Hash::make($request->password);
-        $data->role_id = $request->role_id;
+        $data->role_id = $request->role;
         $data->save();
 
         return response()->json(['message' => 'Data berhasil ditambahkan!'], 200);
@@ -82,20 +82,20 @@ class UserController extends Controller
             'nama' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'role_id' => 'required'
+            'role' => 'required'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
-        $role = Role::findOrFail($request->role_id);
+        $role = Role::findOrFail($request->role);
 
         $data = User::with('role')->findOrFail($id);
         $data->name = $request->name;
         $data->email = $request->email;
         $data->password = Hash::make($request->password);
-        $data->role_id = $request->role_id;
+        $data->role_id = $request->role;
         $data->save();
 
         return response()->json(['message' => 'Data berhasil diubah!'], 200);
