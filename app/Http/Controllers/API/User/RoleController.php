@@ -16,7 +16,7 @@ class RoleController extends Controller
     public function index()
     {
         $data = Role::all();
-
+        $data = json_encode($data);
         return response()->json(['role' => $data]);
     }
 
@@ -49,7 +49,7 @@ class RoleController extends Controller
     public function show($id)
     {
         $data = Role::findOrFail($id);
-
+        $data = json_encode($data);
         return response()->json(['role' => $data]);
     }
 
