@@ -81,7 +81,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'email' => 'required',
-            'password' => 'required',
             'role' => 'required'
         ]);
 
@@ -92,9 +91,15 @@ class UserController extends Controller
         $role = Role::findOrFail($request->role);
 
         $data = User::with('role')->findOrFail($id);
-        $data->name = $request->name;
+
+        if ($request->password == null) {
+            $request->password = $data->password;
+        } else {
+            $data->password = Hash::make($request->password);
+        }
+
+        $data->name = $request->nama;
         $data->email = $request->email;
-        $data->password = Hash::make($request->password);
         $data->role_id = $request->role;
         $data->save();
 
