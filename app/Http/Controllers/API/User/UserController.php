@@ -92,9 +92,7 @@ class UserController extends Controller
 
         $data = User::with('role')->findOrFail($id);
 
-        if ($request->password == null) {
-            $request->password = $data->password;
-        } else {
+        if ($request->password != null) {
             $data->password = Hash::make($request->password);
         }
 

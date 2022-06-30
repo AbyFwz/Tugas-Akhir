@@ -17,8 +17,7 @@ class UpdateUserTable extends Migration
             $table->foreign('role_id')
                 ->references('id')
                 ->on('roles')
-                ->restrictOnDelete()
-                ->restrictOnUpdate();
+                ->restrictOnDelete();
         });
     }
 
