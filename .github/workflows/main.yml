@@ -45,17 +45,8 @@ jobs:
       - name: 🔨 Create .env
         uses: ozaytsev86/create-env-file@v1
         with:
-          ENV_APP_NAME: CERMAN_API
-          ENV_APP_ENV: production
           ENV_APP_KEY: ''
-          ENV_APP_DEBUG: true
-          ENV_APP_URL: http://cerman.tahutekno.com/
           ENV_DB_CONNECTION: mysql
-          ENV_DB_HOST: 127.0.0.1
-          ENV_DB_PORT: 3306
-          ENV_DB_DATABASE: ${{ secrets.DB_NAME }}
-          ENV_DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          ENV_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           ENV_SESSION_DOMAIN: ${{ secrets.HOST }}
           ENV_SANCTUM_STATEFUL_DOMAINS: ${{ secrets.HOST }}
       - name: 🔨 Generate .env key
