@@ -16,9 +16,9 @@ class CreateSuratsTable extends Migration
         Schema::create('surats', function (Blueprint $table) {
             $table->id();
             $table->string('nomor');
+            $table->string('nama');
             $table->string('asal')->nullable();
             $table->string('tujuan')->nullable();
-            $table->text('uraian');
             $table->text('keterangan');
             $table->string('tipe');
             $table->string('file')->nullable();

@@ -68,8 +68,8 @@ class SuratKeluarController extends Controller
 
         $data = new Surat;
         $data->nomor = $request->nomor_surat;
+        $data->nama = $request->nama_surat;
         $data->tujuan = $request->tujuan_surat;
-        $data->uraian = $request->uraian;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Keluar';
         $data->file = $path;
@@ -140,8 +140,8 @@ class SuratKeluarController extends Controller
         }
 
         $data->nomor = $request->nomor_surat;
+        $data->nama = $request->nama_surat;
         $data->tujuan = $request->tujuan_surat;
-        $data->uraian = $request->uraian;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Keluar';
         $data->save();

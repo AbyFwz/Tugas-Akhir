@@ -68,8 +68,8 @@ class SuratMasukController extends Controller
 
         $data = new Surat;
         $data->nomor = $request->nomor_surat;
+        $data->nama = $request->nama_surat;
         $data->asal = $request->asal_surat;
-        $data->uraian = $request->uraian;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Masuk';
         $data->file = null;
@@ -138,8 +138,8 @@ class SuratMasukController extends Controller
 
         $data = Surat::findOrFail($id);
         $data->nomor = $request->nomor_surat;
+        $data->nama = $request->nama_surat;
         $data->asal = $request->asal_surat;
-        $data->uraian = $request->uraian;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Masuk';
         $data->file = $path;
