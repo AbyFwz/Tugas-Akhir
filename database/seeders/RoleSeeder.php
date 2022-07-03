@@ -14,11 +14,19 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            'nama' => 'admin',
-            'keterangan' => 'Role Admin',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        DB::table('roles')->insert(
+            [
+                'nama' => 'admin',
+                'keterangan' => 'Role Admin',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nama' => 'sekretaris',
+                'keterangan' => 'Role Sekretaris',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
     }
 }
