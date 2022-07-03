@@ -61,7 +61,7 @@ class SuratMasukController extends Controller
             $kategori = 'Surat_Masuk';
             $file = $request->file_surat;
             $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori . "." . $file->getClientOriginalExtension();
-            $path = Storage::putFileAs('public/surat', $request->file_surat, $nama_file);
+            $path = Storage::putFileAs('public/surat/surat-masuk/', $request->file_surat, $nama_file);
         } else {
             $nama_file = '';
         }
@@ -89,9 +89,10 @@ class SuratMasukController extends Controller
     public function show($id)
     {
         $data = Surat::with('user')->findOrFail($id);
+        $file = Storage::url($data->file);
         $data = json_encode($data);
 
-        return response()->json(['suratMasuk' => $data], 200);
+        return response()->json(['suratMasuk' => $data, 'file' => $file], 200);
     }
 
     /**
@@ -120,7 +121,7 @@ class SuratMasukController extends Controller
             'nama_surat' => 'required|string|max:255',
             'asal_surat' => 'required|string|max:255',
             'keterangan' => 'string',
-            'file_surat' => 'required|file|mimetypes:application/msword,application/vnd.openxmlformats-officedocument.*,application/pdf,image/*,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/zip,application/x-rar-compressed,text/*,application/octet-stream|max:4096'
+            'file_surat' => 'file|mimetypes:application/msword,application/vnd.openxmlformats-officedocument.*,application/pdf,image/*,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/zip,application/x-rar-compressed,text/*,application/octet-stream|max:4096'
 
         ]);
 
@@ -132,9 +133,7 @@ class SuratMasukController extends Controller
             $kategori = 'Surat_Masuk';
             $file = $request->file_surat;
             $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori . "." . $file->getClientOriginalExtension();
-            $path = Storage::putFileAs('public/surat', $request->file_surat, $nama_file);
-        } else {
-            $nama_file = '';
+            $path = Storage::putFileAs('public/surat/surat-masuk/', $request->file_surat, $nama_file);
         }
 
         $data = Surat::findOrFail($id);
@@ -159,6 +158,7 @@ class SuratMasukController extends Controller
     public function destroy($id)
     {
         $data = Surat::findOrFail($id);
+        Storage::delete($data->file);
         $data->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus!'], 200);

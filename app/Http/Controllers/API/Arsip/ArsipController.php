@@ -99,7 +99,7 @@ class ArsipController extends Controller
     public function show($id)
     {
         $data = Arsip::with('user')->with('kategori')->findOrFail($id);
-        $file = Storage::url($data->file, now()->addMinutes(1));
+        $file = Storage::url($data->file);
         $data = json_encode($data);
 
         return response()->json(['arsip' => $data, 'file' => $file], 200);
