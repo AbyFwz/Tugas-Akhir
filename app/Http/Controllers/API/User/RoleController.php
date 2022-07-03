@@ -28,16 +28,24 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nama_role' => 'required|string|max:55',
+            'keterangan' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
         try {
             $data = new Role;
             $data->nama = $request->nama_role;
             $data->keterangan = $request->keterangan;
             $data->save();
+            return response()->json(['message' => 'Data berhasil diupload'], 200);
         } catch (\Throwable $e) {
             return response()->json(['message' => $e], 500);
         }
-
-        return response()->json(['message' => 'Data berhasil diupload'], 200);
     }
 
     /**
@@ -62,12 +70,25 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Role::findOrFail($id);;
-        $data->nama = $request->nama_role;
-        $data->keterangan = $request->keterangan;
-        $data->save();
+        $validator = Validator::make($request->all(), [
+            'nama_role' => 'required|string|max:55',
+            'keterangan' => 'required|string'
+        ]);
 
-        return response()->json(['message' => 'Data berhasil diubah!']);
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        try {
+            $data = Role::findOrFail($id);;
+            $data->nama = $request->nama_role;
+            $data->keterangan = $request->keterangan;
+            $data->save();
+
+            return response()->json(['message' => 'Data berhasil diubah!']);
+        } catch (\Throwable $e) {
+            return response()->json(['message' => $e], 500);
+        }
     }
 
     /**

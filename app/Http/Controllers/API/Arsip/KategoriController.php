@@ -29,10 +29,13 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), []);
+        $validator = Validator::make($request->all(), [
+            'nama_kategori' => 'required|string|max:255',
+            'keterangan' => 'required|string'
+        ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(["error" => $validator->errors()], 406);
         }
 
         $data = new Kategori();
@@ -66,10 +69,13 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), []);
+        $validator = Validator::make($request->all(), [
+            'nama_kategori' => 'required|string|max:255',
+            'keterangan' => 'required|string'
+        ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(["error" => $validator->errors()], 406);
         }
 
         $data = Kategori::findOrFail($id);

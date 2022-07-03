@@ -30,7 +30,9 @@ class TamuDinasController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), []);
+        $validator = Validator::make($request->all(), [
+            'nama_instansi' => 'required|string|max:255'
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());

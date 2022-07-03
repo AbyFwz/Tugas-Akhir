@@ -32,10 +32,38 @@ class SuratMasukController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), []);
+        /**
+        * *MIMES COLLECTION
+        * application/msword: DOC
+        * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
+        * application/vnd.ms-powerpoint: ppt pps pot
+        * application/pdf: PDF
+        * image/*: all image formats
+        * application/zip: zip
+        * application/x-rar-compressed: rar
+        * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
+        * application/octet-stream: Unknown Type
+        */
+        $validator = Validator::make($request->all(), [
+            'nomor_surat' => 'required|string|max:255',
+            'nama_surat' => 'required|string|max:255',
+            'asal_surat' => 'required|string|max:255',
+            'keterangan' => 'string',
+            'file_surat' => 'required|file|mimetypes:application/msword,application/vnd.openxmlformats-officedocument.*,application/pdf,image/*,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/zip,application/x-rar-compressed,text/*,application/octet-stream|max:4096'
+
+        ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(["error" => $validator->errors()], 406);
+        }
+
+        if ($request->hasFile('file_surat')) {
+            $kategori = 'Surat_Masuk';
+            $file = $request->file_surat;
+            $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori . "." . $file->getClientOriginalExtension();
+            $path = Storage::putFileAs('surat', $request->file_surat, $nama_file);
+        } else {
+            $nama_file = '';
         }
 
         $data = new Surat;
@@ -75,10 +103,38 @@ class SuratMasukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), []);
+        /**
+        * *MIMES COLLECTION
+        * application/msword: DOC
+        * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
+        * application/vnd.ms-powerpoint: ppt pps pot
+        * application/pdf: PDF
+        * image/*: all image formats
+        * application/zip: zip
+        * application/x-rar-compressed: rar
+        * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
+        * application/octet-stream: Unknown Type
+        */
+        $validator = Validator::make($request->all(), [
+            'nomor_surat' => 'required|string|max:255',
+            'nama_surat' => 'required|string|max:255',
+            'asal_surat' => 'required|string|max:255',
+            'keterangan' => 'string',
+            'file_surat' => 'required|file|mimetypes:application/msword,application/vnd.openxmlformats-officedocument.*,application/pdf,image/*,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/zip,application/x-rar-compressed,text/*,application/octet-stream|max:4096'
+
+        ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(["error" => $validator->errors()], 406);
+        }
+
+        if ($request->hasFile('file_surat')) {
+            $kategori = 'Surat_Masuk';
+            $file = $request->file_surat;
+            $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori . "." . $file->getClientOriginalExtension();
+            $path = Storage::putFileAs('surat', $request->file_surat, $nama_file);
+        } else {
+            $nama_file = '';
         }
 
         $data = Surat::findOrFail($id);
@@ -87,7 +143,7 @@ class SuratMasukController extends Controller
         $data->uraian = $request->uraian;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Masuk';
-        $data->file = null;
+        $data->file = $path;
         $data->save();
         $data = json_encode($data);
 
