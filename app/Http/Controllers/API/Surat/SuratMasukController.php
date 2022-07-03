@@ -61,7 +61,7 @@ class SuratMasukController extends Controller
             $kategori = 'Surat_Masuk';
             $file = $request->file_surat;
             $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori . "." . $file->getClientOriginalExtension();
-            $path = Storage::putFileAs('surat', $request->file_surat, $nama_file);
+            $path = Storage::putFileAs('public/surat', $request->file_surat, $nama_file);
         } else {
             $nama_file = '';
         }
@@ -132,7 +132,7 @@ class SuratMasukController extends Controller
             $kategori = 'Surat_Masuk';
             $file = $request->file_surat;
             $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori . "." . $file->getClientOriginalExtension();
-            $path = Storage::putFileAs('surat', $request->file_surat, $nama_file);
+            $path = Storage::putFileAs('public/surat', $request->file_surat, $nama_file);
         } else {
             $nama_file = '';
         }

@@ -71,7 +71,7 @@ class ArsipController extends Controller
             $kategori = Kategori::findOrFail($request->kategori);
             $file = $request->file_arsip;
             $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori->nama . "." . $file->getClientOriginalExtension();
-            $path = Storage::putFileAs('arsip', $request->file_arsip, $nama_file);
+            $path = Storage::putFileAs('public/arsip', $request->file_arsip, $nama_file);
         } else {
             return response()->json(["res" => "No File"], 406);
             $nama_file = '';
@@ -99,9 +99,10 @@ class ArsipController extends Controller
     public function show($id)
     {
         $data = Arsip::with('user')->with('kategori')->findOrFail($id);
+        $file = Storage::url($data->file, now()->addMinutes(1));
         $data = json_encode($data);
 
-        return response()->json(['arsip' => $data], 200);
+        return response()->json(['arsip' => $data, 'file' => $file], 200);
     }
 
     /**
@@ -142,10 +143,10 @@ class ArsipController extends Controller
         $data = Arsip::findOrFail($id);
 
         if ($request->hasFile('file_arsip')) {
-            $kategori = Kategori::findOrFail($request->kategori);
+            $kategori = str_replace(' ', '_', Kategori::findOrFail($request->kategori));
             $file = $request->file_arsip;
             $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori->nama . "." . $file->getClientOriginalExtension();
-            $path = Storage::putFileAs('arsip', $request->file_arsip, $nama_file);
+            $path = Storage::putFileAs('public/arsip', $request->file_arsip, $nama_file);
             $data->file = $path;
         }
 
