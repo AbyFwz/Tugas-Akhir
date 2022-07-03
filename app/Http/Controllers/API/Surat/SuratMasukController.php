@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\Surat;
 use App\Http\Controllers\Controller;
 use App\Models\Surat\Surat;
 use Illuminate\Http\Request;
-
 use app\Models\SuratMasuk;
 use Illuminate\Support\Facades\Validator;
 
