@@ -31,11 +31,14 @@ class TamuDinasController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama_instansi' => 'required|string|max:255'
+            'nama_instansi' => 'required|string',
+            'alamat_instansi' => 'required|string',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string'
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(['error' => $validator->errors()]);
         }
 
         $data = new Tamu;
@@ -74,10 +77,15 @@ class TamuDinasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), []);
+        $validator = Validator::make($request->all(), [
+            'nama_instansi' => 'required|string',
+            'alamat_instansi' => 'required|string',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string'
+        ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(['error' => $validator->errors()]);
         }
 
         $data = Tamu::findOrFail($id);
@@ -90,7 +98,6 @@ class TamuDinasController extends Controller
         $data = json_encode($data);
 
         return response()->json(['message' => 'Data berhasil diubah!'], 200);
-
     }
 
     /**
