@@ -127,7 +127,6 @@ class ArsipController extends Controller
         * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
         * application/octet-stream: Unknown Type
         */
-        return response()->json(['request', $request->all()]);
         $validator = Validator::make($request->all(), [
             'nomor_arsip' => 'required|string|max:255',
             'nama_arsip' => 'required|string|max:255',
