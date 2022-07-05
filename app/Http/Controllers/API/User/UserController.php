@@ -41,7 +41,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 406);
         }
 
         $role = Role::findOrFail($request->role);
@@ -86,10 +86,8 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 406);
         }
-
-        $role = Role::findOrFail($request->role);
 
         $data = User::with('role')->findOrFail($id);
 
@@ -114,7 +112,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $data = User::findOrFail($id);
-        $date->delete();
+        $data->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus!'], 200);
     }

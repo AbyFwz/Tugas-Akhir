@@ -32,7 +32,7 @@ class SiswaController extends Controller
         $validator = Validator::make($request->all(), []);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 406);
         }
 
         $data = new Siswa;
@@ -86,7 +86,7 @@ class SiswaController extends Controller
         $validator = Validator::make($request->all(), []);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 406);
         }
 
         $data = Siswa::findOrFail($id);

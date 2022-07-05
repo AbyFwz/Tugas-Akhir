@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\User;
 use App\Http\Controllers\Controller;
 use App\Models\User\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RoleController extends Controller
 {
@@ -34,7 +35,7 @@ class RoleController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 406);
         }
 
         try {
@@ -76,7 +77,7 @@ class RoleController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 406);
         }
 
         try {

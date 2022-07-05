@@ -33,7 +33,7 @@ class TamuController extends Controller
         $validator = Validator::make($request->all(), []);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 406);
         }
 
         $data = new Tamu;
@@ -74,7 +74,7 @@ class TamuController extends Controller
         $validator = Validator::make($request->all(), []);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 406);
         }
 
         $data = Tamu::findOrFail($id);
