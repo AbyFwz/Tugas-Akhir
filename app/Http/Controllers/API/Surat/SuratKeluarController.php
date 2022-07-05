@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Surat\Surat;
 use Illuminate\Http\Request;
 use App\Models\SuratKeluar;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class SuratKeluarController extends Controller
@@ -46,7 +48,6 @@ class SuratKeluarController extends Controller
         $validator = Validator::make($request->all(), [
             'nomor_surat' => 'required|string|max:255',
             'nama_surat' => 'required|string|max:255',
-            'asal_surat' => 'required|string|max:255',
             'keterangan' => 'string',
             'file_surat' => 'required|file|mimetypes:application/msword,application/vnd.openxmlformats-officedocument.*,application/pdf,image/*,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/zip,application/x-rar-compressed,text/*,application/octet-stream|max:4096'
 
@@ -118,7 +119,6 @@ class SuratKeluarController extends Controller
         $validator = Validator::make($request->all(), [
             'nomor_surat' => 'required|string|max:255',
             'nama_surat' => 'required|string|max:255',
-            'asal_surat' => 'required|string|max:255',
             'keterangan' => 'string',
             'file_surat' => 'file|mimetypes:application/msword,application/vnd.openxmlformats-officedocument.*,application/pdf,image/*,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/zip,application/x-rar-compressed,text/*,application/octet-stream|max:4096'
 
