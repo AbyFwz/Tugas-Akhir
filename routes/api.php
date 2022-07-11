@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\Arsip\ArsipController;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Arsip\KategoriController;
+use App\Http\Controllers\API\Services\UploadController;
 use App\Http\Controllers\API\Siswa\SiswaController;
 use App\Http\Controllers\API\Surat\SuratKeluarController;
 use App\Http\Controllers\API\Surat\SuratMasukController;
@@ -46,4 +47,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('role', RoleController::class);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('upload', [UploadController::class, 'handleUpload']);
 });

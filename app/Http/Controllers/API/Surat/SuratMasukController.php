@@ -128,22 +128,22 @@ class SuratMasukController extends Controller
             return response()->json(["error" => $validator->errors()], 406);
         }
 
+        $data = Surat::findOrFail($id);
+
         if ($request->hasFile('file_surat')) {
             $kategori = 'Surat_Masuk';
             $file = $request->file_surat;
             $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori . "." . $file->getClientOriginalExtension();
             $path = Storage::putFileAs('public/surat/surat-masuk/', $request->file_surat, $nama_file);
+            $data->file = $path;
         }
 
-        $data = Surat::findOrFail($id);
         $data->nomor = $request->nomor_surat;
         $data->nama = $request->nama_surat;
         $data->asal = $request->asal_surat;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Masuk';
-        $data->file = $path;
         $data->save();
-        $data = json_encode($data);
 
         return response()->json(['message' => 'Data berhasil diubah!'], 200);
     }
