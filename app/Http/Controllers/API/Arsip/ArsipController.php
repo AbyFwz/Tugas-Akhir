@@ -39,20 +39,20 @@ class ArsipController extends Controller
     public function store(Request $request)
     {
         /**
-        * *MIMES COLLECTION
-        * application/msword: DOC
-        * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
-        * application/vnd.ms-powerpoint: ppt pps pot
-        * application/pdf: PDF
-        * image/*: all image formats
-        * application/zip: zip
-        * application/x-rar-compressed: rar
-        * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
-        * application/vnd.openxmlformats-officedocument.wordprocessingml.document: DOCX
-        * application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: XLSX
-        * application/vnd.openxmlformats-officedocument.presentationml.presentation: PPTX
-        * application/octet-stream: Unknown Type
-        */
+         * *MIMES COLLECTION
+         * application/msword: DOC
+         * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
+         * application/vnd.ms-powerpoint: ppt pps pot
+         * application/pdf: PDF
+         * image/*: all image formats
+         * application/zip: zip
+         * application/x-rar-compressed: rar
+         * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
+         * application/vnd.openxmlformats-officedocument.wordprocessingml.document: DOCX
+         * application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: XLSX
+         * application/vnd.openxmlformats-officedocument.presentationml.presentation: PPTX
+         * application/octet-stream: Unknown Type
+         */
 
         $validator = Validator::make($request->all(), [
             'nomor_arsip' => 'required|string|max:255',
@@ -68,7 +68,8 @@ class ArsipController extends Controller
         }
 
         if ($request->file('file_arsip')) {
-            $kategori = str_replace(" ","_", Kategori::findOrFail($request->kategori));
+            $kategori = Kategori::findOrFail($request->kategori);
+            $kategori = str_replace(" ", "_", $kategori);
             $file = $request->file_arsip;
             $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori->nama . "." . $file->getClientOriginalExtension();
             $path = Storage::putFileAs('public/arsip', $request->file_arsip, $nama_file);
@@ -116,17 +117,17 @@ class ArsipController extends Controller
     public function update(Request $request, $id)
     {
         /**
-        * *MIMES COLLECTION
-        * application/msword: DOC
-        * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
-        * application/vnd.ms-powerpoint: ppt pps pot
-        * application/pdf: PDF
-        * image/*: all image formats
-        * application/zip: zip
-        * application/x-rar-compressed: rar
-        * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
-        * application/octet-stream: Unknown Type
-        */
+         * *MIMES COLLECTION
+         * application/msword: DOC
+         * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
+         * application/vnd.ms-powerpoint: ppt pps pot
+         * application/pdf: PDF
+         * image/*: all image formats
+         * application/zip: zip
+         * application/x-rar-compressed: rar
+         * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
+         * application/octet-stream: Unknown Type
+         */
         $validator = Validator::make($request->all(), [
             'nomor_arsip' => 'required|string|max:255',
             'nama_arsip' => 'required|string|max:255',

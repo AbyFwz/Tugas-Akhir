@@ -72,7 +72,7 @@ class SuratMasukController extends Controller
         $data->asal = $request->asal_surat;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Masuk';
-        $data->file = null;
+        $data->file = $path;
         $data->user_id = auth()->user()->id;
         $data->save();
         $data = json_encode($data);
