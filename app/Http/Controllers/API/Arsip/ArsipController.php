@@ -23,7 +23,7 @@ class ArsipController extends Controller
      */
     public function index()
     {
-        $data = Arsip::with('user')->with('kategori')->get();
+        $data = Arsip::with('user')->with('kategori')->orderBy('created_at','desc')->get();
         // dd($data); die;
         $data = json_encode($data);
         return response()->json(['arsip' => $data]);

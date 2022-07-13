@@ -19,7 +19,7 @@ class SuratKeluarController extends Controller
      */
     public function index()
     {
-        $data = Surat::with('user')->where('tipe', 'Surat Keluar')->where('asal', null)->get();
+        $data = Surat::with('user')->where('tipe', 'Surat Keluar')->where('asal', null)->orderBy('created_at','desc')->get();
         $data = json_encode($data);
 
         return response()->json(['suratKeluar' => $data]);
