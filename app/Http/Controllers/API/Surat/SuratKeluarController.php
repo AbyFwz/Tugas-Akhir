@@ -49,8 +49,7 @@ class SuratKeluarController extends Controller
             'nomor_surat' => 'required|string|max:255',
             'nama_surat' => 'required|string|max:255',
             'keterangan' => 'string',
-            'file_surat' => 'required|file|mimetypes:application/msword,application/vnd.openxmlformats-officedocument.*,application/pdf,image/*,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/zip,application/x-rar-compressed,text/*,application/octet-stream|max:4096'
-
+            'file_surat' => 'required|file|mimetypes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/pdf,image/*,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/zip,application/x-rar-compressed,text/*,application/octet-stream|max:8192'
         ]);
 
         if ($validator->fails()) {
@@ -72,7 +71,7 @@ class SuratKeluarController extends Controller
         $data->tujuan = $request->tujuan_surat;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Keluar';
-        $data->file = 'public/surat/surat-keluar/' . $nama_file;
+        $data->file = 'public/storage/surat/surat-keluar/' . $nama_file;
         $data->user_id = auth()->user()->id;
         $data->save();
         $data = json_encode($data);
