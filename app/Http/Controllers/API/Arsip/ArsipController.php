@@ -68,7 +68,7 @@ class ArsipController extends Controller
         }
 
         if ($request->file('file_arsip')) {
-            $kategori = Kategori::findOrFail($request->kategori);
+            $kategori = str_replace(" ","_", Kategori::findOrFail($request->kategori));
             $file = $request->file_arsip;
             $nama_file = Carbon::now()->format('Y-m-d_His') . "_" . $kategori->nama . "." . $file->getClientOriginalExtension();
             $path = Storage::putFileAs('public/arsip', $request->file_arsip, $nama_file);
