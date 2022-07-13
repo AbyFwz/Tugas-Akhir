@@ -34,17 +34,17 @@ class SuratMasukController extends Controller
     public function store(Request $request)
     {
         /**
-        * *MIMES COLLECTION
-        * application/msword: DOC
-        * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
-        * application/vnd.ms-powerpoint: ppt pps pot
-        * application/pdf: PDF
-        * image/*: all image formats
-        * application/zip: zip
-        * application/x-rar-compressed: rar
-        * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
-        * application/octet-stream: Unknown Type
-        */
+         * *MIMES COLLECTION
+         * application/msword: DOC
+         * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
+         * application/vnd.ms-powerpoint: ppt pps pot
+         * application/pdf: PDF
+         * image/*: all image formats
+         * application/zip: zip
+         * application/x-rar-compressed: rar
+         * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
+         * application/octet-stream: Unknown Type
+         */
         $validator = Validator::make($request->all(), [
             'nomor_surat' => 'required|string|max:255',
             'nama_surat' => 'required|string|max:255',
@@ -72,7 +72,7 @@ class SuratMasukController extends Controller
         $data->asal = $request->asal_surat;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Masuk';
-        $data->file = $path;
+        $data->file = 'public/surat/surat-masuk/' . $nama_file;
         $data->user_id = auth()->user()->id;
         $data->save();
         $data = json_encode($data);
@@ -105,17 +105,17 @@ class SuratMasukController extends Controller
     public function update(Request $request, $id)
     {
         /**
-        * *MIMES COLLECTION
-        * application/msword: DOC
-        * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
-        * application/vnd.ms-powerpoint: ppt pps pot
-        * application/pdf: PDF
-        * image/*: all image formats
-        * application/zip: zip
-        * application/x-rar-compressed: rar
-        * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
-        * application/octet-stream: Unknown Type
-        */
+         * *MIMES COLLECTION
+         * application/msword: DOC
+         * application/vnd.ms-excel: xls xlm xla xlc xlt xlw
+         * application/vnd.ms-powerpoint: ppt pps pot
+         * application/pdf: PDF
+         * image/*: all image formats
+         * application/zip: zip
+         * application/x-rar-compressed: rar
+         * application/vnd.openxmlformats-officedocument.*: DOCX, XLSX, PPTX
+         * application/octet-stream: Unknown Type
+         */
         $validator = Validator::make($request->all(), [
             'nomor_surat' => 'required|string|max:255',
             'nama_surat' => 'required|string|max:255',

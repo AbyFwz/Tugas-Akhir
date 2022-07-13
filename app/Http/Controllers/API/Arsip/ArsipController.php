@@ -81,7 +81,8 @@ class ArsipController extends Controller
         $data->nomor = $request->nomor_arsip;
         $data->nama = $request->nama_arsip;
         $data->keterangan = $request->keterangan;
-        $data->file = $path;
+        // $data->file = $path;
+        $data->file = 'public/storage/arsip/' . $nama_file;
         $data->user_id = auth()->user()->id;
         $data->kategori_id = $request->kategori;
         $data->save();

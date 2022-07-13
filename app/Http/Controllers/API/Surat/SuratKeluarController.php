@@ -72,7 +72,7 @@ class SuratKeluarController extends Controller
         $data->tujuan = $request->tujuan_surat;
         $data->keterangan = $request->keterangan;
         $data->tipe = 'Surat Keluar';
-        $data->file = $path;
+        $data->file = 'public/surat/surat-keluar/' . $nama_file;
         $data->user_id = auth()->user()->id;
         $data->save();
         $data = json_encode($data);
